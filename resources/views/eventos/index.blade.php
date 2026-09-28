@@ -12,7 +12,7 @@
     @forelse ($eventos as $evento)
         <ul>
             <il>{{ $loop->iteration }}</il>
-            <il>{{ $evento['titulo'] }}</il>
+            <il> <a href="/eventos/{{ $evento['id'] }}"> {{ $evento['titulo'] }}</a></il>
             <il>{{ date('d/m/Y', strtotime($evento['data'])) }}</il>
                 @if ($evento['inscritos'] >= $evento['vagas'])
                 <il> <strong>Lotado!</il>

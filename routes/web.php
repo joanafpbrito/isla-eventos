@@ -66,6 +66,17 @@ Route::get('/eventos', function () use ($eventos) {
     return view('eventos.index', ['eventos' => $eventos]);
 });
 
+Route::get('/eventos/{id}', function (int $id) use ($eventos) {
+    $evento = null;
+    foreach ($eventos as $item) {
+        if ($item['id'] === $id) {
+        $evento = $item;
+        }
+    }
+    if ($evento === null) { abort(404);}
+    return view('eventos.show', ['evento' => $evento]);
+})->whereNumber('id');
+
 Route::get('/ola', function () {
     return 'Olá, DWDM!';
 });
