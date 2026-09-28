@@ -63,7 +63,17 @@ Route::get('/', function () {
 });
 
 Route::get('/eventos', function () use ($eventos) {
-    return view('eventos.index', ['eventos' => $eventos]);
+    $tipo = request('tipo');
+    $tiposDisponiveis = array_unique(array_column($eventos, 'tipo'));
+
+    if ($tipo) {
+        $eventos = array_filter($eventos, fn ($evento) => $evento['tipo'] === $tipo);
+    }
+    return view('eventos.index', [
+        'eventos' => $eventos,
+        'tipo' => $tipo,
+        'tiposDisponiveis' => $tiposDisponiveis
+    ]);
 });
 
 Route::get('/eventos/{id}', function (int $id) use ($eventos) {
