@@ -7,7 +7,7 @@ $eventos = [
     'id' => 1, 
     'titulo' => 'Workshop de Laravel', 
     'tipo' => 'workshop',
-    'data' => '2026-10-14', 
+    'data' => '2026-08-14', 
     'local' => 'Laboratório 2.05', 
     'vagas' => 20, 
     'inscritos' => 12
@@ -63,14 +63,28 @@ Route::get('/', function () {
 });
 
 Route::get('/eventos', function () use ($eventos) {
+    usort($eventos, function ($a, $b) {
+            return strtotime($a['data']) - strtotime($b['data']);
+        });
     $tipo = request('tipo');
+    $hoje = date('Y-m-d');
     $tiposDisponiveis = array_unique(array_column($eventos, 'tipo'));
+    $porTipo = array_filter($eventos, fn ($evento) => $evento['tipo'] === $tipo);
+    $proximos = array_filter($eventos, function ($evento) use ($hoje) {
+        $data = date('Y-m-d', strtotime($evento['data']));
+        return $data >= $hoje;
+    });
 
-    if ($tipo) {
-        $eventos = array_filter($eventos, fn ($evento) => $evento['tipo'] === $tipo);
+    if ($tipo === 'proximos') {
+        $listaEventos = $proximos;
+    } elseif ($tipo) {
+        $listaEventos = $porTipo;
+    }
+    else {
+        $listaEventos = $eventos;
     }
     return view('eventos.index', [
-        'eventos' => $eventos,
+        'eventos' => $listaEventos,
         'tipo' => $tipo,
         'tiposDisponiveis' => $tiposDisponiveis
     ]);

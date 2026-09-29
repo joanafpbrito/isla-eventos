@@ -10,3 +10,6 @@ pws1-app/.env, e não vai para o git pq esse ficheiro está incluido no pws1-app
 5. é erro 500, e assume a linha depois de onde deveria de estar o ";" porque ele não fecha a rota anterior, e não sabe o que fazer com uma nova rota dentro do codigo de outra rota. essa mesma rota deixa de estar definida também. 
 
 6. abrir eventos/99 dá erro 404 por causa do empty que deixamos quando fizemos o loop de iteração. o eventos/abc não chega a entrar na função porque na rota ele pede exclusivamente carcteres numéricos com o ->whereNumber('id'), como não recebe esses caracteres nem sequer se mexe.
+
+7. Aqui percebi que não fiz exatamente o que pedia no enunciado. Porque assumi que como era na mesma listagem era na mesma rota. Acabei por criar um “tipo” que é o próximos em vez de um url novo. 
+Mas suponho que o Laravel funcione estilo Cascade, logo se tivéssemos criado uma rota depois de eventos/{id}em que o a seguir a “/” são palavras ia dar erro porque ele ia procurar um id = proximos. Estando a rota protegida por apenas aceitar números já avançava para a próxima rota? Acredito que seja isso
