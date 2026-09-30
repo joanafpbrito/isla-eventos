@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\InicioController;
 
 $interesses = ['Laravel', 'MySQL', 'Git'];
 
-Route::get('/', function () { return view('inicio');})
+Route::get('/', [InicioController::class, 'index'])
 ->name('inicio');
 
 Route::get('/atividades', [EventoController::class, 'index'])
@@ -72,4 +73,8 @@ Route::get('/perfil/{interesse}', function (string $interesse) use ($interesses)
     } else {
         return 'Não gosto nada disso.';
     }
+});
+
+Route:: fallback(function () {
+    return response()->view('erros.404', [], 404);
 });
