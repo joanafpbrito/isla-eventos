@@ -13,3 +13,5 @@ pws1-app/.env, e não vai para o git pq esse ficheiro está incluido no pws1-app
 
 7. Aqui percebi que não fiz exatamente o que pedia no enunciado. Porque assumi que como era na mesma listagem era na mesma rota. Acabei por criar um “tipo” que é o próximos em vez de um url novo. 
 Mas suponho que o Laravel funcione estilo Cascade, logo se tivéssemos criado uma rota depois de eventos/{id}em que o a seguir a “/” são palavras ia dar erro porque ele ia procurar um id = proximos. Estando a rota protegida por apenas aceitar números já avançava para a próxima rota? Acredito que seja isso
+
+8. A rota eventos/tipo/{tipo} nunca irá entrar em conflito com eventos/{id}, porque eventos/{id} está a espera de receber numeros, então eventos/tipo são letras ele nao vai nunca tentar entrar naquela rota

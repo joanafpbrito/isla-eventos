@@ -3,14 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\TipoController;
 
 $interesses = ['Laravel', 'MySQL', 'Git'];
 
 Route::get('/', [InicioController::class, 'index'])
 ->name('inicio');
 
-Route::get('/atividades', [EventoController::class, 'index'])
+Route::get('/eventos', [EventoController::class, 'index'])
 ->name('eventos.index');
+
+Route::get('eventos/tipo/{tipo}', [TipoController::class, 'porTipo'])
+->name('eventos.tipo');
 
 Route::get('/eventos/{id}', [EventoController::class, 'show'])
 ->whereNumber('id')
@@ -76,5 +80,5 @@ Route::get('/perfil/{interesse}', function (string $interesse) use ($interesses)
 });
 
 Route:: fallback(function () {
-    return response()->view('erros.404', [], 404);
+    return response()->view('errors.404', [], 404);
 });

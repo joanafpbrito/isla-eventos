@@ -86,6 +86,11 @@ Rotas
 *****
 routes/web.php
 
+*******
+Imagens
+*******
+public/
+
 
 **************
 Comandos úteis
