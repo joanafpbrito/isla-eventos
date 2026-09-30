@@ -13,9 +13,7 @@
     <p>Data: {{ date('d/m/Y', strtotime($evento['data'])) }}</p>
     <p>Local: {{ ($evento['local']) }}</p>
     <p>Inscritos: {{($evento['inscritos'])}} de {{($evento['vagas'])}}</p>
-    <p><a href="/eventos" role="button">Voltar</a></p>
-    
-
+    <p><a href="{{ route('eventos.index') }}" role="button">Voltar</a></p>
     
 </body>
 </html>

@@ -10,10 +10,10 @@
 <body>
     <h1>Eventos</h1>
     <div>
-        <span> || </span><a href="/eventos">todos</a>
-        <span> || </span><a href="/eventos?tipo=proximos">proximos</a><span> || </span>
+        <span> || </span><a href="{{ route('eventos.index')}}">todos</a>
+        <span> || </span><a href="{{ route('eventos.index', ['tipo' => 'proximos']) }}">proximos</a><span> || </span>
         @foreach ($tiposDisponiveis as $tipoDisponivel)
-            <a href="/eventos?tipo={{ $tipoDisponivel }}">{{ $tipoDisponivel }}</a><span> || </span>
+            <a href="{{ route('eventos.index', ['tipo' => $tipoDisponivel]) }}">{{ $tipoDisponivel }}</a><span> || </span>
         @endforeach
     </div>
     <br><br>
@@ -21,7 +21,7 @@
     @forelse ($eventos as $evento)
         <ul>
             <li>{{ $loop->iteration }}</li>
-            <li> <a href="/eventos/{{ $evento['id'] }}"> {{ $evento['titulo'] }}</a></li>
+            <li> <a href="{{ route('eventos.show', ['id' => $evento['id']]) }}"> {{ $evento['titulo'] }}</a></li>
             <li>{{ date('d/m/Y', strtotime($evento['data'])) }}</li>
                 @if ($evento['inscritos'] >= $evento['vagas'])
                 <li> <strong>Lotado!</strong></li>

@@ -9,6 +9,6 @@
     <p>This was unexpected.</p>
     <h1>404 - Common Sense Not Found</h1>
     <img src="{{ asset('images.jpg') }}" alt="404 - Not Found">
-    <p> <a href="/">Keep searching, you might find it somewhere else</a> </p>
+    <p> <a href="{{ route('inicio') }}">Keep searching, you might find it somewhere else</a> </p>
 </body>
 </html>

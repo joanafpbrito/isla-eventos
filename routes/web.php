@@ -1,105 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-$eventos = [
-    [
-    'id' => 1, 
-    'titulo' => 'Workshop de Laravel', 
-    'tipo' => 'workshop',
-    'data' => '2026-08-14', 
-    'local' => 'Laboratório 2.05', 
-    'vagas' => 20, 
-    'inscritos' => 12
-    ],
-    ['id' => 2, 
-    'titulo' => 'Palestra: Carreiras em Cibersegurança', 
-    'tipo' => 'palestra',
-    'data' => '2026-10-21', 
-    'local' => 'Auditório', 
-    'vagas' => 120, 
-    'inscritos' => 120
-    ],
-    ['id' => 3, 
-    'titulo' => 'Hackathon ISLA 24h', 
-    'tipo' => 'hackathon',
-    'data' => '2026-11-06', 
-    'local' => 'Átrio principal', 
-    'vagas' => 60, 
-    'inscritos' => 41
-    ],
-    ['id' => 4, 
-    'titulo' => 'Git e GitHub para iniciantes', 
-    'tipo' => 'workshop',
-    'data' => '2026-09-30', 
-    'local' => 'Laboratório 1.02', 
-    'vagas' => 25,
-    'inscritos' => 25
-    ],
-    ['id' => 5, 
-    'titulo' => 'Conversa com antigos alunos DWDM', 
-    'tipo' => 'palestra',
-    'data' => '2026-12-02', 
-    'local' => 'Sala 3.10', 
-    'vagas' => 40, 
-    'inscritos' => 9
-    ],
-    [
-    'id' => 6, 
-    'titulo' => 'Oficina de Python', 
-    'tipo' => 'workshop',
-    'data' => '2026-11-15', 
-    'local' => 'Laboratório 2.01',
-    'vagas' => 30,
-    'inscritos' => 30
-    ]
-];
-
+use App\Http\Controllers\EventoController;
 
 $interesses = ['Laravel', 'MySQL', 'Git'];
 
-Route::get('/', function () {
-    return view('inicio');
-});
+Route::get('/', function () { return view('inicio');})
+->name('inicio');
 
-Route::get('/eventos', function () use ($eventos) {
-    usort($eventos, function ($a, $b) {
-            return strtotime($a['data']) - strtotime($b['data']);
-        });
-    $tipo = request('tipo');
-    $hoje = date('Y-m-d');
-    $tiposDisponiveis = array_unique(array_column($eventos, 'tipo'));
-    $porTipo = array_filter($eventos, fn ($evento) => $evento['tipo'] === $tipo);
-    $proximos = array_filter($eventos, function ($evento) use ($hoje) {
-        $data = date('Y-m-d', strtotime($evento['data']));
-        return $data >= $hoje;
-    });
+Route::get('/atividades', [EventoController::class, 'index'])
+->name('eventos.index');
 
-    if ($tipo === 'proximos') {
-        $listaEventos = $proximos;
-    } elseif ($tipo) {
-        $listaEventos = $porTipo;
-    }
-    else {
-        $listaEventos = $eventos;
-    }
-    return view('eventos.index', [
-        'eventos' => $listaEventos,
-        'tipo' => $tipo,
-        'tiposDisponiveis' => $tiposDisponiveis
-    ]);
-});
-
-Route::get('/eventos/{id}', function (int $id) use ($eventos) {
-    $evento = null;
-    foreach ($eventos as $item) {
-        if ($item['id'] === $id) {
-        $evento = $item;
-        }
-    }
-    if ($evento === null) { abort(404);}
-    return view('eventos.show', ['evento' => $evento]);
-})->whereNumber('id');
+Route::get('/eventos/{id}', [EventoController::class, 'show'])
+->whereNumber('id')
+->name('eventos.show');
 
 Route::get('/ola', function () {
     return 'Olá, DWDM!';
