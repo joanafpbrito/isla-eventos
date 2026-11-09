@@ -12,16 +12,7 @@
     <br><br>
     <h2>Eventos do tipo: {{ $tipo ?? 'Todos' }}</h2>
     @forelse ($eventos as $evento)
-        <ul>
-            <li>{{ $loop->iteration }}</li>
-            <li> <a href="{{ route('eventos.show', ['id' => $evento['id']]) }}"> {{ $evento['titulo'] }}</a></li>
-            <li>{{ date('d/m/Y', strtotime($evento['data'])) }}</li>
-                @if ($evento['inscritos'] >= $evento['vagas'])
-                <li> <strong>Lotado!</strong></li>
-                @else
-                <li> Inscreve-te Agora! </li>
-                @endif
-        </ul>   
+        <x-cartao-evento :evento="$evento"/> 
         @empty
         <p>Não há eventos para mostrar.</p>
     @endforelse
