@@ -5,9 +5,9 @@
     <p>{{ date('d/m/Y', strtotime($evento['data'])) }} · {{ $evento['local'] }}</p>
     <p>
         @if ($evento['inscritos'] >= $evento['vagas'])
-            <strong>Lotado!</strong>
-            @else
-            Inscreve-te Agora!
-            @endif
+            <x-alerta> Lotado! </x-alerta>
+        @else
+            <x-alerta>Inscreve-te Agora! </x-alerta>
+        @endif
     </p>
 </article>

@@ -14,6 +14,6 @@
     @forelse ($eventos as $evento)
         <x-cartao-evento :evento="$evento"/> 
         @empty
-        <p>Não há eventos para mostrar.</p>
+        <x-alerta> Não há eventos para mostrar.</x-alerta>
     @endforelse
 @endsection
