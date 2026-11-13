@@ -11,3 +11,22 @@
     @endforelse
     <p><a href="{{ route('eventos.index') }}" role="button">Ver eventos</a></p>
 @endsection
+
+@push('estilos')
+<style>
+    .etiqueta-workshop {
+        background-color: #f97316;
+        color: #ffffff;
+    }
+
+    .etiqueta-palestra {
+        background-color: #2563eb;
+        color: #ffffff;
+    }
+
+    .etiqueta-hackathon {
+        background-color: #9333ea;
+        color: #ffffff;
+    }
+</style>
+@endpush

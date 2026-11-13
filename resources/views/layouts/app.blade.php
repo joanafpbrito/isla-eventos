@@ -6,6 +6,7 @@
     <title>@yield('titulo', 'Início') . {{ config('app.name') }}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    @stack('estilos')
 </head>
 <body>
     @include('partials.menu')
@@ -17,3 +18,4 @@
     @include('partials.rodape')
 </body>
 </html>
+
