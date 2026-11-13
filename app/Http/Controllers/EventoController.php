@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
+use App\Models\Evento;
 
 class EventoController extends Controller
 {
     public function index(Request $request): View
     {
-        $eventos = DB::table('eventos')->orderBy('data')->get();
+        $eventos = Evento::query()->orderBy('data')->get();
         $tipo = $request->query('tipo');
         $hoje = date('Y-m-d');
         $tiposDisponiveis = $eventos->pluck('tipo')

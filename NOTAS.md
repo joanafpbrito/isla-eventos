@@ -31,4 +31,6 @@ Ao ver o erro acredito que tenha algo a ver a configuração inicial do laravel.
 14. Com o rollback, reverte a ultima migração. Neste caso a tabela eventos desapareceu no phpmy admin. No entanto o ficheiro continua lá. E se correr status outra vez mostra que a migração está pendente.
 
 15. php artisan migrate:fresh --seed 
-este comando apaga todos os registos existentes e cria novos. se houvesse dados reais seriam perdidos
+este comando apaga todos os registos existentes e cria novos. se houvesse dados reais seriam perdidos.
+
+16. PL06 - se o modelo se chamasse Local, e a tabela locais, sem Fillable ia assumir o plural acrescentado apenas um s. ou seja locals, e nao iria coincidir com o nome da tabela já definido em portugues "locais". Com o table em cima já determinamos exatamente o nome das tabelas a ser usado.
