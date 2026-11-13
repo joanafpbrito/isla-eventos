@@ -22,4 +22,11 @@ Mas suponho que o Laravel funcione estilo Cascade, logo se tivéssemos criado um
 Os primeiros permitem dizer “neste sitio podes receber vários tipos de coisas, mas apenas 1 coisa” e os segundos permitem-nos dizer, o que vai caber em cada 1 desses sítios. Então, se para cada página quiser uma cor de fundo diferente, no layout abro caminho para isso com o @satck e depois em cada página uso o @push para indicar qual a cor efetivamente. Assim como o @yield, “aqui vais receber alguma coisa” e com o @section indico qual o tipo de coisa. Nos primeiros identificamos o nome, e nos segundos chamamos por esse nome. 
 
 11. PL05 - Parte A - SQLSTATE[42S02]: Base table or view not found: 1146 Table 'isla_eventos.sessions' doesn't exist (Connection: mysql, Host: 127.0.0.1, Port: 3307, Database: isla_eventos, SQL: select * from `sessions` where `id` = IBOdyz0Ye3vsjzLLvSTTn7Vr4epVmd9dXE9MkDcX limit 1)
-Acho 
+Ao ver o erro acredito que tenha algo a ver a configuração inicial do laravel. 
+
+12. PL05 - Parte B - titulo : varchar(150); data : date; vagas : smallint(5); Unsigned em BD significa que o valor não pode ser negativo. Apenas maior ou igual a 0
+
+13. O batch da minha migração é o 2.
+
+14. Com o rollback, reverte a ultima migração. Neste caso a tabela eventos desapareceu no phpmy admin. No entanto o ficheiro continua lá. E se correr status outra vez mostra que a migração está pendente.
+
