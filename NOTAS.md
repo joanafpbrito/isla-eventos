@@ -15,3 +15,5 @@ pws1-app/.env, e não vai para o git pq esse ficheiro está incluido no pws1-app
 Mas suponho que o Laravel funcione estilo Cascade, logo se tivéssemos criado uma rota depois de eventos/{id}em que o a seguir a “/” são palavras ia dar erro porque ele ia procurar um id = proximos. Estando a rota protegida por apenas aceitar números já avançava para a próxima rota? Acredito que seja isso
 
 8. A rota eventos/tipo/{tipo} nunca irá entrar em conflito com eventos/{id}, porque eventos/{id} está a espera de receber numeros, então eventos/tipo são letras ele nao vai nunca tentar entrar naquela rota
+
+9. PL04 - Parte E - usando o script alert no titulo do evento, despoleta um pop-up de alerta. Mas como no componente o titulo nao está preparado para receber codigo, mostra tudo na integra como string no website. Colocando o {!! !!} deixa o componente preparado para interpretar codigo, assim o pop up aparece e a parte da string que é codigo não fica a mostra
