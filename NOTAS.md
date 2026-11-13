@@ -30,3 +30,5 @@ Ao ver o erro acredito que tenha algo a ver a configuração inicial do laravel.
 
 14. Com o rollback, reverte a ultima migração. Neste caso a tabela eventos desapareceu no phpmy admin. No entanto o ficheiro continua lá. E se correr status outra vez mostra que a migração está pendente.
 
+15. php artisan migrate:fresh --seed 
+este comando apaga todos os registos existentes e cria novos. se houvesse dados reais seriam perdidos
