@@ -6,47 +6,65 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use App\Models\Evento;
+use App\Models\Tipo;
 
 class EventoController extends Controller
 {
     public function index(Request $request): View
     {
-        $eventos = Evento::query()->orderBy('data')->get();
         $tipo = $request->query('tipo');
         $hoje = date('Y-m-d');
-        $tiposDisponiveis = $eventos->pluck('tipo')
-            ->unique()
-            ->values();
-        $porTipo = $eventos->filter(function ($evento) use ($tipo) {
-            return $evento->tipo === $tipo;
-        });
+        $eventos = Evento::with('tipo')
+            ->orderBy('data')
+            ->get();
+
+        $tiposDisponiveis = Tipo::orderBy('nome')->get();
+
         $proximos = $eventos->filter(function ($evento) use ($hoje) {
             return $evento->data >= $hoje;
         });
 
         if ($tipo === 'proximos') {
+
             $listaEventos = $proximos;
+
         } elseif ($tipo) {
-            $listaEventos = $porTipo;
+
+            $listaEventos = $eventos->filter(function ($evento) use ($tipo) {
+                return $evento->tipo_id == $tipo;
+            });
+
         } else {
+
             $listaEventos = $eventos;
+
         }
-     
+
+        $tipoSelecionado = null;
+
+        if ($tipo && $tipo !== 'proximos') {
+            $tipoSelecionado = $tiposDisponiveis->firstWhere('id', $tipo);
+        }
+
         return view('eventos.index', [
             'eventos' => $listaEventos,
-            'tipo' => $tipo,
+            'tipo' => $tipo === 'proximos'
+                ? 'Próximos'
+                : ($tipoSelecionado->nome ?? 'Todos'),
             'tiposDisponiveis' => $tiposDisponiveis
         ]);
     }
 
     public function show(int $id): View
     {
-        $evento = DB::table('eventos')->where('id', $id)->first();
+        $evento = Evento::with('tipo')->find($id);
 
         if ($evento === null) {
             abort(404);
         }
 
-        return view('eventos.show', ['evento' => $evento]);
+        return view('eventos.show', [
+            'evento' => $evento
+        ]);
     }
 }

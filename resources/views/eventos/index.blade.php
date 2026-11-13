@@ -6,7 +6,7 @@
         <span> || </span><a href="{{ route('eventos.index')}}">todos</a>
         <span> || </span><a href="{{ route('eventos.index', ['tipo' => 'proximos']) }}">proximos</a><span> || </span>
         @foreach ($tiposDisponiveis as $tipoDisponivel)
-            <a href="{{ route('eventos.index', ['tipo' => $tipoDisponivel]) }}">{{ $tipoDisponivel }}</a><span> || </span>
+            <a href="{{ route('eventos.index', ['tipo' => $tipoDisponivel->id]) }}">{{ $tipoDisponivel->nome }}</a><span> || </span>
         @endforeach
     </div>
     <br><br>

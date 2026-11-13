@@ -34,3 +34,7 @@ Ao ver o erro acredito que tenha algo a ver a configuração inicial do laravel.
 este comando apaga todos os registos existentes e cria novos. se houvesse dados reais seriam perdidos.
 
 16. PL06 - se o modelo se chamasse Local, e a tabela locais, sem Fillable ia assumir o plural acrescentado apenas um s. ou seja locals, e nao iria coincidir com o nome da tabela já definido em portugues "locais". Com o table em cima já determinamos exatamente o nome das tabelas a ser usado.
+
+17. PL06 - Obvio que tiposeeder tem dr correr primeiro que o eventoseeder, porque o tipo de evento vai buscar o id e o nome ao tiposeeder, se o tipo seeder não rodasse primeiro o evento não tinha onde ir buscar a informação
+
+18. A primeira vê quantos registos existem na tabela de eventos. E a ultima mostra quantos registos têm um tipo correspondente na tabela tipos
