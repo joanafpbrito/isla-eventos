@@ -5,6 +5,9 @@
     <p>Tipo: {{ $evento->tipo }}</p>
     <p>Data: {{ date('d/m/Y', strtotime($evento->data)) }}</p>
     <p>Local: {{ $evento->local }}</p>
+    @if ($evento->descricao)
+        <p>Descrição: {{ $evento->descricao }}</p>
+    @endif
     <p>  Inscritos: {{ $evento->inscritos }} de {{ $evento->vagas }}</p>
     <p><a href="{{ route('eventos.index') }}" role="button">Voltar</a></p>
 @endsection

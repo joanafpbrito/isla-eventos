@@ -19,7 +19,8 @@ class EventoSeeder extends Seeder
             'vagas' => 20, 
             'inscritos' => 12,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'descricao' => 'Aprenda os fundamentos do Laravel, um dos frameworks PHP mais populares, e como construir aplicações web robustas e escaláveis.'
             ],
             [ 
             'titulo' => 'Palestra: Carreiras em Cibersegurança', 
@@ -29,7 +30,8 @@ class EventoSeeder extends Seeder
             'vagas' => 120, 
             'inscritos' => 120,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'descricao' => 'Descubra as oportunidades e desafios na área de cibersegurança, com insights de profissionais experientes sobre como construir uma carreira de sucesso.'
             ],
             [
             'titulo' => 'Hackathon ISLA 24h', 
@@ -39,7 +41,8 @@ class EventoSeeder extends Seeder
             'vagas' => 60, 
             'inscritos' => 41,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'descricao' => 'Participe de um evento intensivo para desenvolvedores que desejam criar soluções inovadoras em um ambiente de competição.'
             ],
             [ 
             'titulo' => 'Git e GitHub para iniciantes', 
@@ -49,7 +52,8 @@ class EventoSeeder extends Seeder
             'vagas' => 25,
             'inscritos' => 25,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'descricao' => NULL
             ],
             [
             'titulo' => 'Conversa com antigos alunos DWDM', 
@@ -59,7 +63,8 @@ class EventoSeeder extends Seeder
             'vagas' => 40, 
             'inscritos' => 9,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'descricao' => NULL
             ],
             [
             'titulo' => 'Oficina de Python', 
@@ -69,7 +74,8 @@ class EventoSeeder extends Seeder
             'vagas' => 30,
             'inscritos' => 30,
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
+            'descricao' => NULL
             ]
         ]);
     }
