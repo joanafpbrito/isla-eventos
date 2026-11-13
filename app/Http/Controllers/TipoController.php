@@ -3,27 +3,31 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class TipoController extends Controller
 {
     public function porTipo(string $tipo): View
     {
-        $eventos = config('eventos');
-        $tiposDisponiveis = array_unique(array_column($eventos, 'tipo'));
+        $eventos = DB::table('eventos')->get();
+        $tiposDisponiveis = $eventos->pluck('tipo')
+            ->unique()
+            ->values();
 
-        if (!in_array($tipo, $tiposDisponiveis)) {
+        if (!$tiposDisponiveis->contains($tipo)) {
             abort(404);
         }
-        $porTipo = array_filter($eventos, fn ($evento) => $evento['tipo'] === $tipo);
 
-        usort($porTipo, function ($a, $b) {
-            return strtotime($a['data']) - strtotime($b['data']);
+        $porTipo = $eventos->filter(function ($evento) use ($tipo) {
+            return $evento->tipo === $tipo;
         });
+
+        $porTipo = $porTipo->sortBy('data')->values();
 
         return view('eventos.index', [
             'eventos' => $porTipo,
             'tipo' => $tipo,
             'tiposDisponiveis' => $tiposDisponiveis
-            ]);
-        }
+        ]);
+    }
 }

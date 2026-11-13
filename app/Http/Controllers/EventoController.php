@@ -4,19 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
 class EventoController extends Controller
 {
     public function index(Request $request): View
     {
-        $eventos = config('eventos');
+        $eventos = DB::table('eventos')->orderBy('data')->get();
         $tipo = $request->query('tipo');
         $hoje = date('Y-m-d');
-        $tiposDisponiveis = array_unique(array_column($eventos, 'tipo'));
-        $porTipo = array_filter($eventos, fn ($evento) => $evento['tipo'] === $tipo);
-        $proximos = array_filter($eventos, function ($evento) use ($hoje) {
-            $data = date('Y-m-d', strtotime($evento['data']));
-            return $data >= $hoje;
+        $tiposDisponiveis = $eventos->pluck('tipo')
+            ->unique()
+            ->values();
+        $porTipo = $eventos->filter(function ($evento) use ($tipo) {
+            return $evento->tipo === $tipo;
+        });
+        $proximos = $eventos->filter(function ($evento) use ($hoje) {
+            return $evento->data >= $hoje;
         });
 
         if ($tipo === 'proximos') {
@@ -26,11 +30,7 @@ class EventoController extends Controller
         } else {
             $listaEventos = $eventos;
         }
-
-        usort($listaEventos, function ($a, $b) {
-            return strtotime($a['data']) - strtotime($b['data']);
-        });
-
+     
         return view('eventos.index', [
             'eventos' => $listaEventos,
             'tipo' => $tipo,
@@ -40,21 +40,12 @@ class EventoController extends Controller
 
     public function show(int $id): View
     {
-        $evento = $this->procurar($id);
+        $evento = DB::table('eventos')->where('id', $id)->first();
+
         if ($evento === null) {
             abort(404);
         }
+
         return view('eventos.show', ['evento' => $evento]);
     }
-
-    private function procurar(int $id): ? array
-    {
-        foreach (config('eventos') as $item) {
-            if( $item['id'] === $id) {
-                return $item;
-            }
-        }
-        return null;
-    }
-
 }
